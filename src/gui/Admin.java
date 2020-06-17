@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Admin {
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("Giáo vụ");
+        JFrame frame = new JFrame("Giáo viên");
         frame.setLocation(MouseInfo.getPointerInfo().getLocation());
         JPanel mainPanel = new JPanel();
 
@@ -21,13 +21,13 @@ public class Admin {
         JButton importClasses = new JButton("Nhập danh sách lớp");
         importClasses.setPreferredSize(preferredSize);
 
-        JButton addNewStudent = new JButton("Thêm sinh viên");
+        JButton addNewStudent = new JButton("Thêm sinh viên: ");
         addNewStudent.setPreferredSize(preferredSize);
 
         JButton importTimetable = new JButton("Nhập thời khóa biểu");
         importTimetable.setPreferredSize(preferredSize);
 
-        JButton importStudents = new JButton("Xem danh sách lớp");
+        JButton importStudents = new JButton("Nhập danh sách sinh viên");
         importStudents.setPreferredSize(preferredSize);
 
         JButton viewTimetable = new JButton("Xem thời khóa biểu");
@@ -39,7 +39,7 @@ public class Admin {
         JButton viewScores = new JButton("Xem bảng điểm");
         viewScores.setPreferredSize(preferredSize);
 
-        JButton editScore = new JButton("Sửa điểm");
+        JButton editScore = new JButton("Chỉnh sửa điểm");
         editScore.setPreferredSize(preferredSize);
 
         JButton changePassword = new JButton("Đổi mật khẩu");

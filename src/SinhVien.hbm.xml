@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate
+Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="QuanLySinhVien"
+			name="pojo.SinhVien" table="SINHVIEN">
+		<id name="stt" type="int">
+			<column name="STT" />
+		</id>
+		<property name="maSv" type="int">
+			<column name="MASV" />
+		</property>
+		<property name="hoTen" type="string">
+			<column length="100" name="HOTEN" />
+		</property>
+		<property name="gioiTinh" type="string">
+			<column length="3" name="GIOITINH" />
+		</property>
+		<property name="cmnd" type="string">
+			<column length="20" name="CMND" />
+		</property>
+		<property name="lop" type="string">
+			<column length="20" name="LOP" />
+		</property>
+	</class>
+</hibernate-mapping>

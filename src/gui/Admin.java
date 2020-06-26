@@ -1,7 +1,19 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class ImportClassActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) { 
+		ImportStudent importStudent = new ImportStudent();
+		importStudent.createAndShowGUI();
+	}
+}
 
 public class Admin {
     public void createAndShowGUI() {
@@ -17,9 +29,15 @@ public class Admin {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Dimension preferredSize = new Dimension(200, 30);
-
-        JButton importClasses = new JButton("Nhập danh sách lớp");
+        
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV File", "csv", "text");
+        fileChooser.setFileFilter(filter);
+        
+        JButton importClasses = new JButton("Nhập danh sách lớp(csv)");
+        
         importClasses.setPreferredSize(preferredSize);
+        importClasses.addActionListener(new ImportClassActionListener());
 
         JButton addNewStudent = new JButton("Thêm sinh viên: ");
         addNewStudent.setPreferredSize(preferredSize);
@@ -27,7 +45,7 @@ public class Admin {
         JButton importTimetable = new JButton("Nhập thời khóa biểu");
         importTimetable.setPreferredSize(preferredSize);
 
-        JButton importStudents = new JButton("Nhập danh sách sinh viên");
+        JButton importStudents = new JButton("Xem danh sách lớp");
         importStudents.setPreferredSize(preferredSize);
 
         JButton viewTimetable = new JButton("Xem thời khóa biểu");

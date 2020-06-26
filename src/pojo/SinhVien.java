@@ -8,6 +8,15 @@ public class SinhVien {
 	private String cmnd;
 	private String lop;
 	
+	public SinhVien(int stt, int maSv, String hoTen, String gioiTinh, String cmnd, String lop) {
+		this.stt = stt;
+		this.maSv = maSv;
+		this.hoTen = hoTen;
+		this.gioiTinh = gioiTinh;
+		this.cmnd = cmnd;
+		this.lop = lop;
+	}
+	
 	public int getStt() {
 		return stt;
 	}

@@ -4,20 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-class HandleSignIn implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Admin admin = new Admin();
-        admin.createAndShowGUI();
-    }
-}
+import java.awt.event.WindowEvent;
 
 public class SignIn {
     public void createAndShowGUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame signInFrame = new JFrame("Đăng nhập");
-        signInFrame.setLocation(MouseInfo.getPointerInfo().getLocation());
         JPanel mainPanel = new JPanel();
 
         GridLayout layout = new GridLayout(5, 1);
@@ -40,7 +32,15 @@ public class SignIn {
         passwordText.setPreferredSize(preferredSize);
 
         JButton button = new JButton("Đăng nhập");
-        button.addActionListener(new HandleSignIn());
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Admin admin = new Admin();
+                admin.createAndShowGUI();
+                signInFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                signInFrame.dispatchEvent(new WindowEvent(signInFrame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
 
         mainPanel.add(usernameLabel);
         mainPanel.add(userNameText);
@@ -49,8 +49,9 @@ public class SignIn {
         mainPanel.add(button);
 
         signInFrame.getContentPane().add(mainPanel);
+        
         signInFrame.pack();
-
+        signInFrame.setLocationRelativeTo(null);
         signInFrame.setVisible(true);
     }
 }

@@ -15,10 +15,25 @@ class ImportClassActionListener implements ActionListener {
 	}
 }
 
+class AddStudentActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) { 
+		AddStudent addStudent = new AddStudent();
+		addStudent.createAndShowGUI();
+	}
+}
+
+class ImportTimeTableActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) { 
+		ImportTimeTable importTimeTable = new ImportTimeTable();
+		importTimeTable.createAndShowGUI();
+	}
+}
+
 public class Admin {
     public void createAndShowGUI() {
         JFrame frame = new JFrame("Giáo viên");
-        frame.setLocation(MouseInfo.getPointerInfo().getLocation());
         JPanel mainPanel = new JPanel();
 
         GridLayout layout = new GridLayout(9, 1);
@@ -30,20 +45,18 @@ public class Admin {
 
         Dimension preferredSize = new Dimension(200, 30);
         
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV File", "csv", "text");
-        fileChooser.setFileFilter(filter);
-        
         JButton importClasses = new JButton("Nhập danh sách lớp(csv)");
         
         importClasses.setPreferredSize(preferredSize);
         importClasses.addActionListener(new ImportClassActionListener());
 
-        JButton addNewStudent = new JButton("Thêm sinh viên: ");
+        JButton addNewStudent = new JButton("Thêm sinh viên");
         addNewStudent.setPreferredSize(preferredSize);
+        addNewStudent.addActionListener(new AddStudentActionListener());
 
         JButton importTimetable = new JButton("Nhập thời khóa biểu");
         importTimetable.setPreferredSize(preferredSize);
+        importTimetable.addActionListener(new ImportTimeTableActionListener());
 
         JButton importStudents = new JButton("Xem danh sách lớp");
         importStudents.setPreferredSize(preferredSize);
@@ -75,7 +88,7 @@ public class Admin {
 
         frame.getContentPane().add(mainPanel);
         frame.pack();
-
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }

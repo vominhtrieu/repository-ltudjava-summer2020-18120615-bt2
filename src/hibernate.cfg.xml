@@ -28,6 +28,7 @@
       
       <!-- List of XML mapping files -->
       <mapping resource = "SinhVien.hbm.xml"/>
+      <mapping resource = "ThoiKhoaBieu.hbm.xml"/>
       
    </session-factory>
 </hibernate-configuration >

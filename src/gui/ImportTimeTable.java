@@ -12,11 +12,11 @@ import java.io.*;
 import jdbc.*;
 
 
-public class ImportStudent {
+public class ImportTimeTable {
 	private File selectedFile;
 	
 	public void createAndShowGUI() {
-		JFrame mainFrame = new JFrame("Nhập danh sách lớp");
+		JFrame mainFrame = new JFrame("Nhập thời khóa biểu");
 		Container container = mainFrame.getContentPane();
 		container.setLayout(new GridLayout(5, 1, 0, 5));
 		
@@ -64,16 +64,15 @@ public class ImportStudent {
 					String line;
 					while ((line = reader.readLine()) != null && line.length() != 0) {
 						String[] values = line.split(",");
-						SinhVienDAO.Insert(Integer.parseInt(values[0].trim()),
-								Integer.parseInt(values[1].trim()), values[2].trim(),
-								values[3].trim(), values[4].trim(), textField.getText());
+						ThoiKhoaBieuDAO.Insert(Integer.parseInt(values[0].trim()), values[1].trim(),
+								values[2].trim(), values[3].trim(), textField.getText());
 					}
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thành công");
+					mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
 				}
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thất bại");
 				}
-				mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		

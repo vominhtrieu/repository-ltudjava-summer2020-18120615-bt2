@@ -7,7 +7,7 @@ Mapping DTD 3.0//EN"
 			name="pojo.BangDiem" table="BANGDIEM">
 		<composite-id>
 			<key-many-to-one class="pojo.SinhVien" name="sinhVien">
-				<column name="MSSV" />
+				<column length="8" name="MSSV" />
 			</key-many-to-one>
 			<key-many-to-one class="pojo.MonHoc" name="monHoc">
 				<column length="20" name="MAMON" />

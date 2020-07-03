@@ -5,8 +5,8 @@ Mapping DTD 3.0//EN"
 <hibernate-mapping>
 	<class catalog="QuanLySinhVien"
 			name="pojo.SinhVien" table="SINHVIEN">
-		<id name="mssv" type="int">
-			<column name="MSSV" />
+		<id name="mssv" type="string">
+			<column length="8" name="MSSV" />
 		</id>
 		<property name="maLop" type="string">
 			<column length="20" name="MALOP" />

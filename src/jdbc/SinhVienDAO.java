@@ -1,28 +1,52 @@
 package jdbc;
 
-import org.hibernate.Transaction;
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import pojo.SinhVien;
 
 public class SinhVienDAO {
-	public static void Insert(int mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
+	public static void Insert(String mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
 		SinhVien sv = new SinhVien(mssv, maLop, hoTen, gioiTinh, cmnd);
 		Session session = HibernateUtility.getSession();
-		
+
 		Transaction transaction = null;
-		
+
 		try {
 			transaction = session.beginTransaction();
 			session.save(sv);
 			transaction.commit();
-		}
-		catch (HibernateException e) {
+		} catch (HibernateException e) {
 			transaction.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
+	}
+
+	public static List<SinhVien> GetList(String maLop) {
+		List<SinhVien> dsSinhVien = null;
+		Session session = HibernateUtility.getSession();
+
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+
+			Query query = session.createQuery("SELECT sv FROM SinhVien sv WHERE sv.maLop = :maLop");
+			query.setString("maLop", maLop);
+
+			dsSinhVien = query.list();
+
+		} catch (HibernateException e) {
+
+		} finally {
+			session.close();
+		}
+
+		return dsSinhVien;
 	}
 }

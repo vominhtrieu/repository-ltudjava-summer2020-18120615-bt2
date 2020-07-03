@@ -64,9 +64,8 @@ public class ImportStudent {
 					String line;
 					while ((line = reader.readLine()) != null && line.length() != 0) {
 						String[] values = line.split(",");
-						SinhVienDAO.Insert(Integer.parseInt(values[0].trim()),
-								Integer.parseInt(values[1].trim()), values[2].trim(),
-								values[3].trim(), values[4].trim(), textField.getText());
+						SinhVienDAO.Insert(Integer.parseInt(values[0].trim()), textField.getText(), values[1].trim(),
+								values[2].trim(), values[3].trim());
 					}
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thành công");
 				}

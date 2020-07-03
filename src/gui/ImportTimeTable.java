@@ -64,13 +64,14 @@ public class ImportTimeTable {
 					String line;
 					while ((line = reader.readLine()) != null && line.length() != 0) {
 						String[] values = line.split(",");
-						ThoiKhoaBieuDAO.Insert(Integer.parseInt(values[0].trim()), values[1].trim(),
-								values[2].trim(), values[3].trim(), textField.getText());
+						MonHocDAO.Insert(values[0].trim(), textField.getText(),
+								values[1].trim(), values[2].trim());
 					}
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thành công");
 					mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
 				}
 				catch (Exception e1) {
+					System.out.println(e1.getMessage());
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thất bại");
 				}
 			}

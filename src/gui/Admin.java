@@ -31,12 +31,20 @@ class ImportTimeTableActionListener implements ActionListener {
 	}
 }
 
+class ChangeClassActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) { 
+		ChangeClass changeClass = new ChangeClass();
+		changeClass.createAndShowGUI();
+	}
+}
+
 public class Admin {
     public void createAndShowGUI() {
         JFrame frame = new JFrame("Giáo viên");
         JPanel mainPanel = new JPanel();
 
-        GridLayout layout = new GridLayout(9, 1);
+        GridLayout layout = new GridLayout(10, 1);
 
         mainPanel.setLayout(layout);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,20,10));
@@ -57,15 +65,19 @@ public class Admin {
         JButton importTimetable = new JButton("Nhập thời khóa biểu");
         importTimetable.setPreferredSize(preferredSize);
         importTimetable.addActionListener(new ImportTimeTableActionListener());
-
-        JButton importStudents = new JButton("Xem danh sách lớp");
-        importStudents.setPreferredSize(preferredSize);
+        
+        JButton changeClass = new JButton("Đổi lớp");
+        changeClass.setPreferredSize(preferredSize);
+        changeClass.addActionListener(new ChangeClassActionListener());
+        
+        JButton viewClass = new JButton("Xem danh sách lớp");
+        viewClass.setPreferredSize(preferredSize);
 
         JButton viewTimetable = new JButton("Xem thời khóa biểu");
         viewTimetable.setPreferredSize(preferredSize);
 
         JButton importScores = new JButton("Nhập bảng điểm");
-        importStudents.setPreferredSize(preferredSize);
+        importScores.setPreferredSize(preferredSize);
 
         JButton viewScores = new JButton("Xem bảng điểm");
         viewScores.setPreferredSize(preferredSize);
@@ -79,7 +91,8 @@ public class Admin {
         mainPanel.add(importClasses);
         mainPanel.add(addNewStudent);
         mainPanel.add(importTimetable);
-        mainPanel.add(importStudents);
+        mainPanel.add(changeClass);
+        mainPanel.add(viewClass);
         mainPanel.add(viewTimetable);
         mainPanel.add(importScores);
         mainPanel.add(viewScores);

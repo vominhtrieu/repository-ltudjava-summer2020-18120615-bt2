@@ -1,34 +1,38 @@
 package pojo;
 
 public class SinhVien {
-	private int stt;
-	private int maSv;
+	private int mssv;
+	private String maLop;
 	private String hoTen;
 	private String gioiTinh;
 	private String cmnd;
-	private String lop;
 	
-	public SinhVien(int stt, int maSv, String hoTen, String gioiTinh, String cmnd, String lop) {
-		this.stt = stt;
-		this.maSv = maSv;
+	public SinhVien() {
+	}
+	
+	public SinhVien(int mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
+		this.mssv = mssv;
 		this.hoTen = hoTen;
 		this.gioiTinh = gioiTinh;
 		this.cmnd = cmnd;
-		this.lop = lop;
+		this.maLop = maLop;
 	}
 	
-	public int getStt() {
-		return stt;
+	public int getMssv() {
+		return mssv;
 	}
-	public void setStt(int stt) {
-		this.stt = stt;
+
+	public void setMssv(int mssv) {
+		this.mssv = mssv;
 	}
-	public int getMaSv() {
-		return maSv;
+	
+	public String getMaLop() {
+		return maLop;
 	}
-	public void setMaSv(int maSv) {
-		this.maSv = maSv;
+	public void setMaLop(String lop) {
+		this.maLop = lop;
 	}
+	
 	public String getHoTen() {
 		return hoTen;
 	}
@@ -46,11 +50,5 @@ public class SinhVien {
 	}
 	public void setCmnd(String cmnd) {
 		this.cmnd = cmnd;
-	}
-	public String getLop() {
-		return lop;
-	}
-	public void setLop(String lop) {
-		this.lop = lop;
 	}
 }

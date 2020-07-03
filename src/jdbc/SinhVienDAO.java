@@ -7,8 +7,8 @@ import org.hibernate.Session;
 import pojo.SinhVien;
 
 public class SinhVienDAO {
-	public static void Insert(int stt, int mssv, String hoTen, String gioiTinh, String cmnd, String lop) {
-		SinhVien sv = new SinhVien(stt, mssv, hoTen, gioiTinh, cmnd, lop);
+	public static void Insert(int mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
+		SinhVien sv = new SinhVien(mssv, maLop, hoTen, gioiTinh, cmnd);
 		Session session = HibernateUtility.getSession();
 		
 		Transaction transaction = null;

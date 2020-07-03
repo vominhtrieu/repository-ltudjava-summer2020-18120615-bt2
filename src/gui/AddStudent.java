@@ -13,13 +13,9 @@ public class AddStudent {
 	public void createAndShowGUI() {
 		JFrame mainFrame = new JFrame("Thêm Sinh Viên");
 		Container container = mainFrame.getContentPane();
-		container.setLayout(new GridLayout(14, 1));
+		container.setLayout(new GridLayout(12, 1));
 		
 		Dimension preferredSize = new Dimension(200, 30);
-		
-		JLabel noLabel = new JLabel("Số thứ tự: ");
-		JTextField noTextField = new JTextField();
-		noTextField.setPreferredSize(preferredSize);
 		
 		JLabel idLabel = new JLabel("MSSV: ");
 		JTextField idTextField = new JTextField();
@@ -46,21 +42,20 @@ public class AddStudent {
 		submitBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String no = noTextField.getText();
 				String id = idTextField.getText();
 				String name = nameTextField.getText();
 				String gender = genderTextField.getText();
 				String cmnd = cmndTextField.getText();
-				String lop = classTextField.getText();
+				String classId = classTextField.getText();
 				
-				if (no.length() == 0 || id.length() == 0 || name.length() == 0 || gender.length() == 0
-						|| gender.length() == 0 || cmnd.length() == 0 || lop.length() == 0) {
+				if (id.length() == 0 || name.length() == 0 || gender.length() == 0
+						|| gender.length() == 0 || cmnd.length() == 0 || classId.length() == 0) {
 					JOptionPane.showMessageDialog(mainFrame, "Chưa nhập đủ thông tin");
 					return;
 				}
 				
 				try {
-					SinhVienDAO.Insert(Integer.parseInt(no), Integer.parseInt(id), name, gender, cmnd, lop);
+					SinhVienDAO.Insert(Integer.parseInt(id), classId, name, gender, cmnd);
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thành công");
 					mainFrame.dispatchEvent(new WindowEvent(mainFrame, WindowEvent.WINDOW_CLOSING));
 				}
@@ -70,8 +65,6 @@ public class AddStudent {
 			}
 		});
 		
-		container.add(noLabel);
-		container.add(noTextField);
 		container.add(idLabel);
 		container.add(idTextField);
 		container.add(nameLabel);

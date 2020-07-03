@@ -4,21 +4,21 @@ Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class catalog="QuanLySinhVien"
-			name="pojo.ThoiKhoaBieu" table="THOIKHOABIEU">
-		<id name="stt" type="int">
-			<column name="STT" />
-		</id>
-		<property name="maMon" type="string">
-			<column length="100" name="MAMON" />
-		</property>
+			name="pojo.MonHoc" table="MONHOC">
+		<composite-id>
+			<key-property name="maMon" type="string">
+				<column length="20" name="MAMON" />
+			</key-property>
+			<key-property name="maLop" type="string">
+				<column length="20" name="MALOP" />
+			</key-property>
+		</composite-id>
+		
 		<property name="tenMon" type="string">
-			<column length="3" name="TENMON" />
+			<column length="100" name="TENMON" />
 		</property>
 		<property name="phongHoc" type="string">
 			<column length="20" name="PHONGHOC" />
-		</property>
-		<property name="lop" type="string">
-			<column length="20" name="LOP" />
 		</property>
 	</class>
 </hibernate-mapping>

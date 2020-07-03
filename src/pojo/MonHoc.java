@@ -1,26 +1,22 @@
 package pojo;
 
-public class ThoiKhoaBieu {
-	private int stt;
+import java.io.*;
+
+public class MonHoc implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String maMon;
+	private String maLop;
 	private String tenMon;
 	private String phongHoc;
-	private String lop;
 	
-	public ThoiKhoaBieu(int stt, String maMon, String tenMon, String phongHoc, String lop) {
-		this.setStt(stt);
+	public MonHoc() {
+	}
+	
+	public MonHoc(String maMon, String maLop, String tenMon, String phongHoc) {
 		this.setMaMon(maMon);
+		this.setMaLop(maLop);
 		this.setTenMon(tenMon);
 		this.setPhongHoc(phongHoc);
-		this.setLop(lop);
-	}
-
-	public int getStt() {
-		return stt;
-	}
-
-	public void setStt(int stt) {
-		this.stt = stt;
 	}
 
 	public String getMaMon() {
@@ -29,6 +25,14 @@ public class ThoiKhoaBieu {
 
 	public void setMaMon(String maMon) {
 		this.maMon = maMon;
+	}
+	
+	public String getMaLop() {
+		return maLop;
+	}
+
+	public void setMaLop(String maLop) {
+		this.maLop = maLop;
 	}
 
 	public String getTenMon() {
@@ -46,14 +50,4 @@ public class ThoiKhoaBieu {
 	public void setPhongHoc(String phongHoc) {
 		this.phongHoc = phongHoc;
 	}
-
-	public String getLop() {
-		return lop;
-	}
-
-	public void setLop(String lop) {
-		this.lop = lop;
-	}
-	
-	
 }

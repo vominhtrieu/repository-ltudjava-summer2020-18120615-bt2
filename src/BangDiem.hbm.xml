@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate
+Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="QuanLySinhVien"
+			name="pojo.BangDiem" table="BANGDIEM">
+		<composite-id>
+			<key-many-to-one class="pojo.SinhVien" name="sinhVien">
+				<column name="MSSV" />
+			</key-many-to-one>
+			<key-many-to-one class="pojo.MonHoc" name="monHoc">
+				<column length="20" name="MAMON" />
+				<column length="20" name="MALOP" />
+			</key-many-to-one>
+		</composite-id>
+		<property name="diemGk" type="double">
+			<column name="DIEMGK" />
+		</property>
+		<property name="diemCk" type="double">
+			<column name="DIEMCK" />
+		</property>
+		<property name="diemKhac" type="double">
+			<column name="DIEMKHAC" />
+		</property>
+		<property name="diemTong" type="double">
+			<column name="DIEMTONG" />
+		</property>
+	</class>
+</hibernate-mapping>

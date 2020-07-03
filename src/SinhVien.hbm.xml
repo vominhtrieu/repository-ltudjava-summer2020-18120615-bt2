@@ -5,11 +5,11 @@ Mapping DTD 3.0//EN"
 <hibernate-mapping>
 	<class catalog="QuanLySinhVien"
 			name="pojo.SinhVien" table="SINHVIEN">
-		<id name="stt" type="int">
-			<column name="STT" />
+		<id name="mssv" type="int">
+			<column name="MSSV" />
 		</id>
-		<property name="maSv" type="int">
-			<column name="MASV" />
+		<property name="maLop" type="string">
+			<column length="20" name="MALOP" />
 		</property>
 		<property name="hoTen" type="string">
 			<column length="100" name="HOTEN" />
@@ -19,9 +19,6 @@ Mapping DTD 3.0//EN"
 		</property>
 		<property name="cmnd" type="string">
 			<column length="20" name="CMND" />
-		</property>
-		<property name="lop" type="string">
-			<column length="20" name="LOP" />
 		</property>
 	</class>
 </hibernate-mapping>

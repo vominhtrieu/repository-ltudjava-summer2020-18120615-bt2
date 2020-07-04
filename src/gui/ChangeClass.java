@@ -33,6 +33,8 @@ class OldTableActionListener implements ListSelectionListener {
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		try {
+			if (oldTable.getSelectedRow() < 0)
+				return;
 			List<MonHoc> dsMonHoc2 = MonHocDAO
 					.getListBySubjectID(oldTable.getValueAt(oldTable.getSelectedRow(), 0).toString());
 
@@ -69,6 +71,8 @@ class FindSubjectsActionListener implements ActionListener {
 			if (dsMonHoc == null || dsMonHoc.size() == 0) {
 				JOptionPane.showMessageDialog(null, "Sinh viên này chưa đăng ký môn");
 			} else {
+				newTable.setModel(new DefaultTableModel(0, 0));
+
 				DefaultTableModel model = new DefaultTableModel(0, 0);
 				String[] headers = new String[] { "Mã Môn học", "Mã Lớp", "Tên Môn học", "Phòng học" };
 				model.setColumnIdentifiers(headers);

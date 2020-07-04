@@ -1,6 +1,6 @@
 package pojo;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class MonHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -8,10 +8,15 @@ public class MonHoc implements Serializable {
 	private String maLop;
 	private String tenMon;
 	private String phongHoc;
-	
+
 	public MonHoc() {
 	}
-	
+
+	public MonHoc(String maMon, String maLop) {
+		this.setMaMon(maMon);
+		this.setMaLop(maLop);
+	}
+
 	public MonHoc(String maMon, String maLop, String tenMon, String phongHoc) {
 		this.setMaMon(maMon);
 		this.setMaLop(maLop);
@@ -26,7 +31,7 @@ public class MonHoc implements Serializable {
 	public void setMaMon(String maMon) {
 		this.maMon = maMon;
 	}
-	
+
 	public String getMaLop() {
 		return maLop;
 	}

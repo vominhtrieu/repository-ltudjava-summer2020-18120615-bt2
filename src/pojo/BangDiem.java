@@ -1,6 +1,6 @@
 package pojo;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class BangDiem implements Serializable {
 	private static final long serialVersionUID = 2L;
@@ -10,12 +10,16 @@ public class BangDiem implements Serializable {
 	private double diemCk;
 	private double diemKhac;
 	private double diemTong;
-	
+
 	public BangDiem() {
 	}
-	
-	public BangDiem(SinhVien sinhVien, MonHoc monHoc,
-			double diemGk, double diemCk, double diemKhac, double diemTong) {
+
+	public BangDiem(SinhVien sinhVien, MonHoc monHoc) {
+		this.setSinhVien(sinhVien);
+		this.setMonHoc(monHoc);
+	}
+
+	public BangDiem(SinhVien sinhVien, MonHoc monHoc, double diemGk, double diemCk, double diemKhac, double diemTong) {
 		this.setSinhVien(sinhVien);
 		this.setMonHoc(monHoc);
 		this.setDiemGk(diemGk);
@@ -23,7 +27,7 @@ public class BangDiem implements Serializable {
 		this.setDiemKhac(diemKhac);
 		this.setDiemTong(diemTong);
 	}
-	
+
 	public SinhVien getSinhVien() {
 		return sinhVien;
 	}
@@ -71,6 +75,5 @@ public class BangDiem implements Serializable {
 	public void setDiemTong(double diemTong) {
 		this.diemTong = diemTong;
 	}
-	
-	
+
 }

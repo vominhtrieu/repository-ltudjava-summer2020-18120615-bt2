@@ -10,6 +10,10 @@ public class SinhVien {
 	public SinhVien() {
 	}
 
+	public SinhVien(String mssv) {
+		this.mssv = mssv;
+	}
+
 	public SinhVien(String mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
 		this.mssv = mssv;
 		this.hoTen = hoTen;

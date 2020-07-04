@@ -78,6 +78,7 @@ public class MonHocDAO {
 
 			transaction.commit();
 		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
 			transaction.rollback();
 		} finally {
 			session.close();
@@ -92,28 +93,21 @@ public class MonHocDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-
-			Query query1 = session.createQuery("SELECT bd FROM BangDiem bd WHERE bd.sinhVien.mssv = :mssv"
+			Query query1 = session.createQuery("DELETE FROM BangDiem bd WHERE bd.sinhVien.mssv = :mssv"
 					+ " AND bd.monHoc.maMon = :maMon AND bd.monHoc.maLop = :maLop");
 			query1.setString("mssv", mssv);
 			query1.setString("maMon", maMonHoc);
 			query1.setString("maLop", maLopCu);
 
-			BangDiem bangDiem = (BangDiem) query1.list().get(0);
-			session.delete(bangDiem);
-			System.out.println(bangDiem.getMonHoc().getMaLop());
+			query1.executeUpdate();
 
-			Query query2 = session
-					.createQuery("SELECT mon FROM MonHoc mon WHERE mon.maMon = :maMon AND mon.maLop = :maLop");
-			query2.setString("maMon", maMonHoc);
-			query2.setString("maLop", maLopMoi);
-			MonHoc monHoc = (MonHoc) query2.list().get(0);
-
-			bangDiem.setMonHoc(monHoc);
+			SinhVien sinhVien = session.get(SinhVien.class, mssv);
+			MonHoc monHoc = session.get(MonHoc.class, new MonHoc(maMonHoc, maLopMoi, null, null));
+			BangDiem bangDiem = new BangDiem(sinhVien, monHoc, 0, 0, 0, 0);
 			session.save(bangDiem);
-
 			transaction.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			transaction.rollback();
 		} finally {
 			session.close();

@@ -25,9 +25,12 @@ public class ViewClass {
 		Container container = mainFrame.getContentPane();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
-		JLabel label = new JLabel("Nhập mã lớp");
-		JTextField textField = new JTextField();
-		textField.setPreferredSize(new Dimension(200, 30));
+		JLabel classIdLabel = new JLabel("Nhập mã lớp");
+		JTextField classIdTextField = new JTextField();
+		classIdTextField.setPreferredSize(new Dimension(200, 30));
+		JLabel subjectIdLabel = new JLabel("Nhập mã môn(Nếu có)");
+		JTextField subjectIdTextField = new JTextField();
+		subjectIdTextField.setPreferredSize(new Dimension(200, 30));
 		JButton searchBtn = new JButton("Tra cứu");
 		searchBtn.setPreferredSize(new Dimension(200, 30));
 
@@ -40,7 +43,15 @@ public class ViewClass {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					List<SinhVien> dsSinhVien = SinhVienDAO.GetList(textField.getText());
+					String classId = classIdTextField.getText();
+					String subjectId = subjectIdTextField.getText();
+
+					List<SinhVien> dsSinhVien;
+					if (subjectId.length() == 0)
+						dsSinhVien = SinhVienDAO.GetList(classId);
+					else
+						dsSinhVien = SinhVienDAO.GetList(classId, subjectId);
+
 					DefaultTableModel model = new DefaultTableModel(0, 0);
 					String[] headers = new String[] { "MSSV", "Mã Lớp", "Họ tên", "Giới tính", "CMND" };
 					model.setColumnIdentifiers(headers);
@@ -55,8 +66,10 @@ public class ViewClass {
 			}
 		});
 
-		container.add(label);
-		container.add(textField);
+		container.add(classIdLabel);
+		container.add(classIdTextField);
+		container.add(subjectIdLabel);
+		container.add(subjectIdTextField);
 		container.add(searchBtn);
 		container.add(scrollPane);
 		mainFrame.pack();

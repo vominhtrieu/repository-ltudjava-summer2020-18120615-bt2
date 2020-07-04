@@ -87,6 +87,30 @@ public class MonHocDAO {
 		return dsMonHoc;
 	}
 
+	public static List<MonHoc> getListByClassID(String maLop) {
+		Session session = HibernateUtility.getSession();
+
+		Transaction transaction = null;
+		List<MonHoc> dsMonHoc = null;
+
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("SELECT mon FROM MonHoc mon WHERE mon.maLop = :maLop");
+			query.setString("maLop", maLop);
+
+			dsMonHoc = query.list();
+
+			transaction.commit();
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+
+		return dsMonHoc;
+	}
+
 	public static void ChangeClass(String mssv, String maMonHoc, String maLopCu, String maLopMoi) {
 		Session session = HibernateUtility.getSession();
 

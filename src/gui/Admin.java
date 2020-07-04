@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -50,12 +51,50 @@ class ViewClassActionListener implements ActionListener {
 	}
 }
 
+class ViewTimetableActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		ViewTimetable viewTimeTable = new ViewTimetable();
+		viewTimeTable.createAndShowGUI();
+	}
+}
+
+class ImportScoreActionListener implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		ImportScore importScore = new ImportScore();
+		importScore.createAndShowGUI();
+	}
+}
+
+class ViewScoreActionListener implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		ViewScore viewScore = new ViewScore();
+		viewScore.createAndShowGUI();
+	}
+}
+
+class LogoutActionListener implements ActionListener {
+	JFrame frame;
+
+	public LogoutActionListener(JFrame frame) {
+		this.frame = frame;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		SignIn signIn = new SignIn();
+		signIn.createAndShowGUI();
+		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+	}
+}
+
 public class Admin {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Giáo viên");
 		JPanel mainPanel = new JPanel();
 
-		GridLayout layout = new GridLayout(10, 1);
+		GridLayout layout = new GridLayout(11, 1);
 
 		mainPanel.setLayout(layout);
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
@@ -87,18 +126,25 @@ public class Admin {
 
 		JButton viewTimetable = new JButton("Xem thời khóa biểu");
 		viewTimetable.setPreferredSize(preferredSize);
+		viewTimetable.addActionListener(new ViewTimetableActionListener());
 
 		JButton importScores = new JButton("Nhập bảng điểm");
 		importScores.setPreferredSize(preferredSize);
+		importScores.addActionListener(new ImportScoreActionListener());
 
 		JButton viewScores = new JButton("Xem bảng điểm");
 		viewScores.setPreferredSize(preferredSize);
+		viewScores.addActionListener(new ViewScoreActionListener());
 
 		JButton editScore = new JButton("Chỉnh sửa điểm");
 		editScore.setPreferredSize(preferredSize);
 
 		JButton changePassword = new JButton("Đổi mật khẩu");
 		changePassword.setPreferredSize(preferredSize);
+
+		JButton logout = new JButton("Đăng xuất");
+		logout.setPreferredSize(preferredSize);
+		logout.addActionListener(new LogoutActionListener(frame));
 
 		mainPanel.add(importClasses);
 		mainPanel.add(addNewStudent);
@@ -110,6 +156,7 @@ public class Admin {
 		mainPanel.add(viewScores);
 		mainPanel.add(editScore);
 		mainPanel.add(changePassword);
+		mainPanel.add(logout);
 
 		frame.getContentPane().add(mainPanel);
 		frame.pack();

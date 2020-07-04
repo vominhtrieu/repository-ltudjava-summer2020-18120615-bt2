@@ -19,20 +19,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import jdbc.MonHocDAO;
+import jdbc.BangDiemDAO;
 
-public class ImportTimeTable {
+public class ImportScore {
 	private File selectedFile;
 
 	public void createAndShowGUI() {
-		JFrame mainFrame = new JFrame("Nhập thời khóa biểu");
+		JFrame mainFrame = new JFrame("Nhập bảng điểm");
 		Container container = mainFrame.getContentPane();
-		container.setLayout(new GridLayout(5, 1, 0, 5));
+		container.setLayout(new GridLayout(7, 1, 0, 5));
 
 		Dimension preferredSize = new Dimension(200, 30);
-		JLabel label = new JLabel("Nhập tên lớp");
-		JTextField textField = new JTextField();
-		textField.setPreferredSize(preferredSize);
+		JLabel classIdLabel = new JLabel("Nhập mã lớp");
+		JTextField classIdTextField = new JTextField();
+		classIdTextField.setPreferredSize(preferredSize);
+
+		JLabel subjectIdLabel = new JLabel("Nhập mã môn");
+		JTextField subjectIdTextField = new JTextField();
+		subjectIdTextField.setPreferredSize(preferredSize);
 
 		JButton selectFileBtn = new JButton("Chọn file");
 		selectFileBtn.setPreferredSize(preferredSize);
@@ -57,8 +61,12 @@ public class ImportTimeTable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().length() == 0) {
-					JOptionPane.showMessageDialog(mainFrame, "Chưa nhập tên lớp");
+				if (classIdTextField.getText().length() == 0) {
+					JOptionPane.showMessageDialog(mainFrame, "Chưa nhập mã lớp");
+					return;
+				}
+				if (subjectIdTextField.getText().length() == 0) {
+					JOptionPane.showMessageDialog(mainFrame, "Chưa nhập mã môn");
 					return;
 				}
 				if (selectedFile == null) {
@@ -72,12 +80,19 @@ public class ImportTimeTable {
 					String line;
 					while ((line = reader.readLine()) != null && line.length() != 0) {
 						String[] values = line.split(",");
-						if (values.length != 3) {
+						if (values.length != 5) {
 							JOptionPane.showMessageDialog(null, "Dữ liệu không hợp lệ");
 							reader.close();
 							return;
-						} else
-							MonHocDAO.Insert(values[0].trim(), textField.getText(), values[1].trim(), values[2].trim());
+						} else {
+							String mssv = values[0];
+							double diemGk = Double.parseDouble(values[1]);
+							double diemCk = Double.parseDouble(values[2]);
+							double diemKhac = Double.parseDouble(values[3]);
+							double diemTong = Double.parseDouble(values[4]);
+							BangDiemDAO.Insert(mssv, subjectIdTextField.getText(), classIdTextField.getText(), diemGk,
+									diemCk, diemKhac, diemTong);
+						}
 					}
 					reader.close();
 					JOptionPane.showMessageDialog(mainFrame, "Nhập dữ liệu thành công");
@@ -89,8 +104,10 @@ public class ImportTimeTable {
 			}
 		});
 
-		container.add(label);
-		container.add(textField);
+		container.add(classIdLabel);
+		container.add(classIdTextField);
+		container.add(subjectIdLabel);
+		container.add(subjectIdTextField);
 		container.add(selectFileBtn);
 		container.add(submitBtn);
 		mainFrame.pack();

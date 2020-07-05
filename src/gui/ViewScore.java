@@ -57,7 +57,6 @@ public class ViewScore {
 					String[] headers = new String[] { "MSSV", "Họ tên", "Điểm GK", "Điểm CK", "Điểm Khác",
 							"Điểm tổng" };
 					model.setColumnIdentifiers(headers);
-					System.out.println(dsBangDiem.get(1).getSinhVien().getMssv());
 					table.setModel(model);
 
 					int soLuongDau = 0;

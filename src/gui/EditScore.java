@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 
 import jdbc.BangDiemDAO;
 import pojo.BangDiem;
-import pojo.SinhVien;
 
 public class EditScore {
 	public void createAndShowGUI() {
@@ -47,24 +45,40 @@ public class EditScore {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					String mssv = idTextField.getText();
 					String classId = classIdTextField.getText();
 					String subjectId = subjectIdTextField.getText();
 
-					List<BangDiem> dsBangDiem = BangDiemDAO.getList(classId, subjectId);
+					BangDiem bangDiem = BangDiemDAO.get(mssv, classId, subjectId);
 					DefaultTableModel model = new DefaultTableModel(0, 0);
-					String[] headers = new String[] { "MSSV", "Họ tên", "Điểm GK", "Điểm CK", "Điểm Khác",
-							"Điểm tổng" };
+					String[] headers = new String[] { "Điểm GK", "Điểm CK", "Điểm Khác", "Điểm tổng" };
 					model.setColumnIdentifiers(headers);
-					System.out.println(dsBangDiem.get(1).getSinhVien().getMssv());
 					table.setModel(model);
 
-					for (BangDiem bangDiem : dsBangDiem) {
-						SinhVien sinhVien = bangDiem.getSinhVien();
-						model.addRow(new Object[] { sinhVien.getMssv(), sinhVien.getHoTen(), bangDiem.getDiemGk(),
-								bangDiem.getDiemCk(), bangDiem.getDiemKhac(), bangDiem.getDiemTong() });
-					}
+					model.addRow(new Object[] { bangDiem.getDiemGk(), bangDiem.getDiemCk(), bangDiem.getDiemKhac(),
+							bangDiem.getDiemTong() });
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Không tìm thấy lớp này");
+				}
+			}
+		});
+
+		JButton submitBtn = new JButton("Xác nhận đổi điểm");
+		submitBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String mssv = idTextField.getText();
+					String maLop = classIdTextField.getText();
+					String maMon = subjectIdTextField.getText();
+					double diemGk = Double.parseDouble(table.getValueAt(0, 0).toString());
+					double diemCk = Double.parseDouble(table.getValueAt(0, 1).toString());
+					double diemKhac = Double.parseDouble(table.getValueAt(0, 2).toString());
+					double diemTong = Double.parseDouble(table.getValueAt(0, 3).toString());
+					BangDiemDAO.edit(mssv, maLop, maMon, diemGk, diemCk, diemKhac, diemTong);
+					JOptionPane.showMessageDialog(null, "Chỉnh sửa điểm hoàn tất");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Lựa chọn không hợp lệ");
 				}
 			}
 		});
@@ -77,6 +91,7 @@ public class EditScore {
 		container.add(subjectIdTextField);
 		container.add(searchBtn);
 		container.add(scrollPane);
+		container.add(submitBtn);
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);

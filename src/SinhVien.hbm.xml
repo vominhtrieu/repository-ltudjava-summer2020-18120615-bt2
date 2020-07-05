@@ -20,5 +20,7 @@ Mapping DTD 3.0//EN"
 		<property name="cmnd" type="string">
 			<column length="20" name="CMND" />
 		</property>
+		<property name="matKhau" type="string">
+		</property>
 	</class>
 </hibernate-mapping>

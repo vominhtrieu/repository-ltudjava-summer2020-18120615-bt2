@@ -51,4 +51,40 @@ public class BangDiemDAO {
 		}
 		return dsBangDiem;
 	}
+
+	public static BangDiem get(String mssv, String maLop, String maMon) {
+		BangDiem bangDiem = null;
+		Session session = HibernateUtility.getSession();
+		try {
+			Query query = session.createQuery("SELECT bd FROM BangDiem bd WHERE bd.sinhVien.mssv=:mssv AND "
+					+ "bd.monHoc.maLop=:maLop AND bd.monHoc.maMon=:maMon");
+			query.setString("mssv", mssv);
+			query.setString("maLop", maLop);
+			query.setString("maMon", maMon);
+			bangDiem = (BangDiem) query.list().get(0);
+		} catch (HibernateException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return bangDiem;
+	}
+
+	public static void edit(String mssv, String maLop, String maMon, double diemGk, double diemCk, double diemKhac,
+			double diemTong) {
+		Session session = HibernateUtility.getSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			SinhVien sv = new SinhVien(mssv);
+			MonHoc mon = new MonHoc(maMon, maLop);
+			BangDiem bangDiem = new BangDiem(sv, mon, diemGk, diemCk, diemKhac, diemTong);
+			session.update(bangDiem);
+			transaction.commit();
+		} catch (HibernateException ex) {
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+	}
 }

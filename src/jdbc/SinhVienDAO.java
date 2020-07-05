@@ -8,17 +8,20 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pojo.SinhVien;
+import pojo.TaiKhoan;
 
 public class SinhVienDAO {
 	public static void Insert(String mssv, String maLop, String hoTen, String gioiTinh, String cmnd) {
-		SinhVien sv = new SinhVien(mssv, maLop, hoTen, gioiTinh, cmnd);
 		Session session = HibernateUtility.getSession();
 
 		Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
+			SinhVien sv = new SinhVien(mssv, maLop, hoTen, gioiTinh, cmnd);
 			session.save(sv);
+			TaiKhoan tk = new TaiKhoan(mssv, mssv, "sv");
+			session.save(tk);
 			transaction.commit();
 		} catch (HibernateException e) {
 			transaction.rollback();

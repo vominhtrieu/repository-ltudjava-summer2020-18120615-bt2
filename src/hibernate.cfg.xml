@@ -30,5 +30,6 @@
       <mapping resource = "SinhVien.hbm.xml"/>
       <mapping resource = "MonHoc.hbm.xml"/>
       <mapping resource = "BangDiem.hbm.xml"/>
+      <mapping resource = "TaiKhoan.hbm.xml"/>
    </session-factory>
 </hibernate-configuration >

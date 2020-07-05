@@ -73,6 +73,14 @@ class ViewScoreActionListener implements ActionListener {
 	}
 }
 
+class EditScoreActionListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		EditScore editScore = new EditScore();
+		editScore.createAndShowGUI();
+	}
+}
+
 class LogoutActionListener implements ActionListener {
 	JFrame frame;
 
@@ -138,6 +146,7 @@ public class Admin {
 
 		JButton editScore = new JButton("Chỉnh sửa điểm");
 		editScore.setPreferredSize(preferredSize);
+		editScore.addActionListener(new EditScoreActionListener());
 
 		JButton changePassword = new JButton("Đổi mật khẩu");
 		changePassword.setPreferredSize(preferredSize);

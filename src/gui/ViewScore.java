@@ -21,6 +21,32 @@ import pojo.BangDiem;
 import pojo.SinhVien;
 
 public class ViewScore {
+	public void createAndShowGUI(String id) {
+		JFrame mainFrame = new JFrame("Xem bảng điểm");
+		Container container = mainFrame.getContentPane();
+		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(400, 150));
+		JTable table = new JTable();
+		scrollPane.setViewportView(table);
+		DefaultTableModel model = new DefaultTableModel(0, 0);
+		String[] headers = new String[] { "Mã Lớp", "Mã Môn", "Điểm GK", "Điểm CK", "Điểm Khác", "Điểm tổng" };
+		model.setColumnIdentifiers(headers);
+		table.setModel(model);
+
+		List<BangDiem> dsBangDiem = BangDiemDAO.getList(id);
+
+		for (BangDiem bangDiem : dsBangDiem) {
+			model.addRow(new Object[] { bangDiem.getMonHoc().getMaLop(), bangDiem.getMonHoc().getMaMon(),
+					bangDiem.getDiemGk(), bangDiem.getDiemCk(), bangDiem.getDiemKhac(), bangDiem.getDiemTong() });
+		}
+
+		container.add(scrollPane);
+		mainFrame.pack();
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setVisible(true);
+	}
+
 	public void createAndShowGUI() {
 		JFrame mainFrame = new JFrame("Xem danh sách lớp");
 		Container container = mainFrame.getContentPane();

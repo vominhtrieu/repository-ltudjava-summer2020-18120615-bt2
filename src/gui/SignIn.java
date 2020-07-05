@@ -50,10 +50,11 @@ public class SignIn {
 					TaiKhoan tk = TaiKhoanDAO.get(userNameText.getText());
 					if (tk.getMatKhau().equals(passwordText.getText())) {
 						if (tk.getLoaiTaiKhoan().equals("gv")) {
-							Admin admin = new Admin();
+							AdminGUI admin = new AdminGUI(tk.getTenDangNhap());
 							admin.createAndShowGUI();
 						} else {
-
+							StudentGUI student = new StudentGUI(tk.getTenDangNhap());
+							student.createAndShowGUI();
 						}
 						signInFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						signInFrame.dispatchEvent(new WindowEvent(signInFrame, WindowEvent.WINDOW_CLOSING));

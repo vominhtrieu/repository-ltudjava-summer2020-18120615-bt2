@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -97,15 +96,34 @@ class LogoutActionListener implements ActionListener {
 	}
 }
 
-public class Admin {
+class ChangePasswordActionListener implements ActionListener {
+	private String id;
+
+	public ChangePasswordActionListener(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		ChangePassword changePassword = new ChangePassword(id);
+		changePassword.createAndShowGUI();
+	}
+}
+
+public class AdminGUI {
+	private String id;
+
+	public AdminGUI(String id) {
+		this.id = id;
+	}
+
 	public void createAndShowGUI() {
-		JFrame frame = new JFrame("Giáo viên");
+		JFrame frame = new JFrame("Giáo vụ");
 		JPanel mainPanel = new JPanel();
 
 		GridLayout layout = new GridLayout(11, 1);
 
 		mainPanel.setLayout(layout);
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -150,6 +168,7 @@ public class Admin {
 
 		JButton changePassword = new JButton("Đổi mật khẩu");
 		changePassword.setPreferredSize(preferredSize);
+		changePassword.addActionListener(new ChangePasswordActionListener(id));
 
 		JButton logout = new JButton("Đăng xuất");
 		logout.setPreferredSize(preferredSize);
